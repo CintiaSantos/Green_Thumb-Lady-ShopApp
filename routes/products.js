@@ -58,6 +58,44 @@ router.post("/", (req, res) => {
   });
 });
 
+//ROUTE TO GET ALL PRODUCT
+router.get("/", (req, res) => {
+  Product.find({}, (error, allProducts) => {
+    if (error) {
+      console.error(error);
+      res.status(400).json({
+        // error handling magic
+        error: "an error has occurred",
+      });
+    } else {
+      console.log("Success");
+      res.status(200).json({
+        message: "Success",
+        allProducts: allProducts,
+      });
+    }
+  });
+});
+
+//ROUTE TO GET PRODUCT BY ID
+router.get("/:id", (req, res) => {
+  Product.findOne({ _id: req.params.id }, (error, plant) => {
+    if (error) {
+      console.error(error);
+      res.status(400).json({
+        // error handling magic
+        error: "an error has occurred",
+      });
+    } else {
+      console.log("Success");
+      res.status(200).json({
+        message: "Success",
+        plant: plant,
+      });
+    }
+  });
+});
+
 // ROUTE TO DELETE A PRODUCT
 
 router.delete("/:productId/:userId", (req, res) => {

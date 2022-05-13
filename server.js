@@ -18,6 +18,9 @@ server.get("/", (req, res) => {
 
 const userRouter = require("./routes/users");
 server.use("/user", userRouter);
+//
+// const extraRouter = require("./routes/extra");
+// server.use("/extra", extraRouter);
 
 const productRouter = require("./routes/products");
 server.use("/product", productRouter);

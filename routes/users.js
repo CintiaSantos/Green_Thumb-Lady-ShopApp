@@ -23,6 +23,43 @@ router.post("/", (req, res) => {
   });
 });
 
+// ROUTE TO GET ALL USERS
+router.get("/", (req, res) => {
+  User.find({}, (error, allUsers) => {
+    if (error) {
+      console.error(error);
+      res.status(400).json({
+        error: "an error has occurred",
+      });
+    } else {
+      console.log("Success");
+      res.status(200).json({
+        message: "Success",
+        allUsers: allUsers,
+      });
+    }
+  });
+});
+
+//ROUTE TO GET USER BY ID
+router.get("/:id", (req, res) => {
+  User.findOne({ _id: req.params.id }, (error, user) => {
+    if (error) {
+      console.error(error);
+      res.status(400).json({
+        // error handling magic
+        error: "an error has occurred",
+      });
+    } else {
+      console.log("Success");
+      res.status(200).json({
+        message: "Success",
+        user: user,
+      });
+    }
+  });
+});
+
 // ROUTE TO DELETE A USER
 
 router.delete("/:id", (req, res) => {
